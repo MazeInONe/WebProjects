@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="关键词" />
+    <meta name="description" content="页面描述内容" />
+    <meta name="refresh" content="0;url=" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form action="/" method="get">
+    	Search<input type="search" placeholder="测试搜索" autosave="aoao.org.cn" result="8">
+        <input type="submit" name="Search" value="Search"/>
+    </form>
+    <div id="girl">
+        <img src="./girl.jfif">
+    </div>
+    <div id="test-external">
+        <p>如何学习<a href="http://jquery.com">jQuery</a>？</p>
+        <p>首先，你要学习<a href="/wiki/1022910821149312">JavaScript</a>，并了解基本的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a>。</p>
+    </div>
+    <script>
+        $.fn.external = function(){
+            return this.filter('a').each(function(){
+                console.log(this)
+                var a = $(this);
+                var url = a.attr("href");
+                if(url && (url.indexOf("http://") == 0 || url.indexOf("https://") == 0)){
+                    a.attr("href", "#0")
+                    .remove("target")
+                    .append(`<i class="uk-icon-external-link"></i>`)
+                    .click(function(){
+                        if(confirm(`你确定要去往${url}?`))
+                        open(url);
+                    })
+                }
+            })
+        }
+       $("#test-external a").external();
+       </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Quick(unSorted, left, right) {
+        if (left >= right) return;
+        let basepoint = partition(unSorted, left, right);
+        Quick(unSorted, left, basepoint - 1);
+        Quick(unSorted, basepoint + 1, right);
+      }
+
+      function partion(unSorted, left, right) {
+        let baseIndex = left;
+        let baseValue = unSorted[left];
+        while (left != right) {
+          if (left < right && baseValue > unSorted[right]) {
+            [unSorted[baseIndex], unSorted[right]] = [
+              unSorted[right],
+              unSorted[baseIndex],
+            ];
+          }
+          right--;
+
+          if (left < right && unSorted[left] > baseValue) {
+            [unSorted[left], unSorted[baseIndex]] = [
+              unSorted[baseIndex],
+              unSorted[left],
+            ];
+          }
+          left++;
+        }
+        return left;
+      }
+
+      function partition(nums, left, right) {
+        let pivot = right;
+        let leftIndex = left;
+        for (let i = left; i < right; i++) {
+          if (nums[i] < nums[pivot]) {
+            [nums[leftIndex], nums[i]] = [nums[i], nums[leftIndex]];
+            leftIndex++;
+          }
+        }
+        [nums[leftIndex], nums[pivot]] = [nums[pivot], nums[leftIndex]];
+        return leftIndex;
+      }
+
+      var unSorted = [2, 3, 1, 5, 8, 4, 9];
+      // Before
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+      Quick(unSorted);
+      // After
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+    </script>
+  </body>
+</html>

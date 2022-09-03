@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Select(unSorted) {
+          let i,j
+          let len = unSorted.length
+          for(i=0;i<len;i++){
+            let min = unSorted[i]
+            let currentIndex = i
+            for(j=i;j<len;j++){
+                if(unSorted[j] < min){
+                    min = unSorted[j]
+                    currentIndex = j
+                }
+            }
+            [unSorted[currentIndex], unSorted[i]] = [unSorted[i], unSorted[currentIndex]]
+          }
+      }
+
+      var unSorted = [2, 3, 1, 5, 8, 4, 9];
+      // Before
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+      Select(unSorted);
+      // After
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+    </script>
+  </body>
+</html>

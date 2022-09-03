@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Bubble(unSorted) {
+        let i, j;
+        let len = unSorted.length;
+        for(i=len-1;i>0;i--){
+          for(j=i;j>0;j--){
+            if(unSorted[j] < unSorted[j-1]){
+              [unSorted[j], unSorted[j-1]] = [unSorted[j-1], unSorted[j]]
+            }
+          }
+        }
+      }
+
+      var unSorted = [2, 3, 1, 5, 8, 4, 7, 9];
+      // Before
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+      Bubble(unSorted);
+      // After
+      unSorted.forEach((e) => void console.log(e));
+      console.log("------------------");
+    </script>
+  </body>
+</html>

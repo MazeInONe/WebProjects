@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="demo">
+      <input id="in" />
+    </div>
+  </body>
+  <script>
+    // 拿到元素
+    var input = document.getElementById("in");
+
+    // 防抖
+    function debounce(fn, delay) {
+      let timeId;
+      return function () {
+        if (timeId) {
+          clearTimeout(timeId);
+          timeId = setTimeout(() => void fn.call(this, arguments[0]), delay);
+        } else {
+          timeId = setTimeout(() => void fn.call(this, arguments[0]), delay);
+        }
+      };
+    }
+
+    // 节流
+    function throttle(fn, delay) {
+      let timeId;
+      return function () {
+        if (timeId) return;
+        else {
+          timeId = setTimeout(() => {
+            fn.call(this, arguments[0]);
+            timeId = null;
+          }, delay);
+        }
+      };
+    }
+
+    function handledebounce(e) {
+      console.log(e);
+    }
+
+    function handlethrottle(e) {
+      var dt = new Date();
+      console.log(e, dt);
+    }
+
+    debouncefn = debounce(handledebounce, 500);
+
+    throttlefn = throttle(handlethrottle, 1000);
+    // input.oninput = function(e){
+    //     debouncefn(e.target.value)
+    // }
+    input.oninput = function (e) {
+      throttlefn(e.target.value);
+    };
+  </script>
+</html>
